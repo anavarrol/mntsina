@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="static/contrato.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<h1>Contrato</h1>
+<a href="/" >
+    <img src="/static/images/logo_sina-01.svg" alt="Logo">
+</a>
+
+<form>
+    <label for="IdContrato">IdContrato:</label>
+    <input type="text" id="IdContrato" name="IdContrato">
+    <label for="Descripcion">Descripcion:</label>
+    <input type="text" id="Descripcion" name="Descripcion">
+    <button type="button" onclick="filter()">Filtrar</button>
+
+    <a href="#" onclick="showConfig()" class="btn btn-primary"><i class="fas fa-folder-plus"
+            title="Añadir Contrato"></i></a>
+
+    <div id="loading" style="display:none">
+        <i class="fas fa-spinner fa-spin"></i> Cargando...
+    </div>
+
+</form>
+<!-- Popup de añadir -->
+<div id="configPopup" class="popup">
+    <button id="closePopupBtn" onclick="hideConfig()">X</button>
+    <h2>Añadir Contrato</h2>
+    <form>
+        <label for="configIdContrato">IdContrato:</label>
+        <input type="text" id="configIdContrato" name="configIdContrato" required>
+
+        <label for="configDescripcion">Descripcion:</label>
+        <input type="text" id="configDescripcion" name="configDescripcion" required>
+
+        <label for="configIdGarante">IdGarante:</label>
+        <input type="text" id="configIdGarante" name="configIdGarante">
+        <i class="fas fa-search" onclick="showGarante()" style="cursor:pointer;"></i>
+
+        <label for="configIdCatalogo">IdCatalogo:</label>
+        <input type="text" id="configIdCatalogo" name="configIdCatalogo" required>
+        <i class="fas fa-search" onclick="showcatalogo()" style="cursor:pointer;"></i>
+
+        <label for="configObservaciones">Obseraciones:</label>
+        <input type="text" id="configObservaciones" name="configObservaciones" required>
+
+        <label for="configTipoContrato">Tipo Contrato:</label>
+        <input type="text" id="configTipoContrato" name="configTipoContrato" required>
+
+        <label for="configLPA">Centro LPA:</label>
+        <input type="text" id="configLPA" name="configLPA" required>
+
+        <label for="configTNF">Centro TNF:</label>
+        <input type="text" id="configTNF" name="configTNF" required>
+
+        <div class="buttons-container">
+        <button type="submit" onclick="GuardarConfig()">Guardar</button>
+        <button type="button" onclick="hideConfig()">Cancelar</button>
+        </div>
+    </form>
+</div>
+
+<!-- Popup de editar -->
+<div id="editPopup" class="popup">
+    <button id="closePopupBtn" onclick="hideEdit()">X</button>
+    <h2>Editar Grupo de Diagnostico</h2>
+    <form>
+        
+        <label for="editIdContrato">IdContrato:</label>
+        <input type="text" id="editIdContrato" name="editIdContrato" required>
+
+        <label for="editDescripcion">Descripcion:</label>
+        <input type="text" id="editDescripcion" name="editDescripcion" required>
+
+        <label for="editIdGarante">IdGarante:</label>
+        <input type="text" id="editIdGarante" name="editIdGarante" required>
+        <i class="fas fa-search" onclick="showGarante()" style="cursor:pointer;"></i>
+
+        <label for="editIdCatalogo">IdCatalogo:</label>
+        <input type="text" id="editIdCatalogo" name="editIdCatalogo" required>
+        <i class="fas fa-search" onclick="showcatalogo()" style="cursor:pointer;"></i>
+
+        <label for="editObservaciones">Observaciones:</label>
+        <input type="text" id="editObservaciones" name="editObservaciones" required>
+
+        <label for="editTipoContrato">TipoContrato:</label>
+        <input type="text" id="editTipoContrato" name="editTipoContrato" required>
+
+        <label for="editCENT_LPA">Centro LPA:</label>
+        <input type="text" id="editCENT_LPA" name="editCENT_LPA" required>
+
+        <label for="editCENT_TNF">Centro TNF:</label>
+        <input type="text" id="editCENT_TNF" name="editCENT_TNF" required>
+
+
+        <button type="button" onclick="updateRow()">Guardar</button>
+        <button type="button" onclick="hideEdit()">Cancelar</button>
+    </form>
+</div>
+<!-- Pop-up de Catalogo -->
+{% include "popup/catalogoPopup.html" %}
+
+<!-- Pop-up de Garante-->
+{% include "popup/garantePopup.html" %}
+
+
+<table id="resultsTable">
+    <thead>
+        <tr>
+            <th>IdContrato</th>
+            <th>Descripcion</th>
+            <th>IdGarante</th>
+            <th>IdCatalogo</th>
+            <th>Obsevaciones</th>
+            <th>TipoContrato</th>
+            <th>Centro LPA</th>
+            <th>Centro TNF</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+</table>
+
+<div id="paginationDiv">
+    <select id="pagination" title="Seleccionar página"></select>
+</div id="paginationDiv">
+
+<script src="/static/scripts/contrato.js"></script>
+<script src="/static/scripts/popup/Catalogo.js"></script>
+<script src="/static/scripts/popup/Garante.js"></script>
+
+{% endblock %}

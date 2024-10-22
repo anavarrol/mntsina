@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="static/styles.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/0oxzj/9crcFrmCU2Q2w0xWwm0UxEA02grzD06p" crossorigin="anonymous">
+
+
+<h1>Prestacion</h1>
+<a href="/">
+    <img src="/static/images/logo_sina-01.svg" alt="Logo">
+</a>
+
+<form id="configForm" action="/insert_prestacion">
+    <label for="idPrestacion">IdPrestacion:</label>
+    <input type="text" id="idPrestacion" name="idPrestacion">
+
+    <label for="Descripcion">Descripcion:</label>
+    <input type="text" id="Descripcion" name="Descripcion">
+
+    <button type="button" onclick="filter()">Filtrar</button>
+    <button type="button" onclick="showImportPopup()" class="btn btn-primary"><i class="fas fa-file-import" title="Importar"></i></button>
+
+    <a href="#" onclick="showConfig()" class="btn btn-primary"><i class="fas fa-folder-plus"
+            title="Añadir Familia"></i></a>
+
+    <!-- Popup de adição -->
+    <div id="configPopup" class="popup">
+        <button id="closePopupBtn" onclick="hideConfig()">X</button>
+        <h2>Añadir Prestacion</h2>
+        <form>
+            <label for="IdCatalogo">IdCatalogo:</label>
+            <input type="text" id="ConfigIdCatalogo" name="IdCatalogo" required>
+            <i class="fas fa-search" onclick="showcatalogo()" style="cursor:pointer;"></i>
+
+            <label for="IdPrestacion">IdPrestacion:</label>
+            <input type="text" id="ConfigIdPrestacion" name="IdPrestacion" required>
+
+            <label for="IdFamilia">IdFamilia:</label>
+            <input type="text" id="configIdFamilia" />
+            <i class="fas fa-search" onclick="showFamilias()" style="cursor:pointer;"></i>
+
+
+            <label for="IdSubFamilia">IdSubFamilia:</label>
+            <input type="text" id="configIdSubFamilia" name="IdSubFamilia" required>
+            <i class="fas fa-search" onclick="showSubFamilias()" style="cursor:pointer;"></i>
+
+            <label for="Descripcion">Descripcion:</label>
+            <input type="text" id="ConfigDescripcion" name="Descripcion" required>
+
+            <label for="UnidadMedida">UnidadMedida:</label>
+            <input type="text" id="ConfigUnidadMedida" name="UnidadMedida" required>
+
+            <label for="Duracion">Duracion:</label>
+            <input type="text" id="ConfigDuracion" name="Duracion" required>
+
+
+            <div class="buttons-container">
+                <button type="button" onclick="GudarConfig()">Guardar</button>
+                <button type="button" onclick="hideConfig()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Popup de edição -->
+    <div id="editPopup" class="popup">
+        <button id="closePopupBtn" onclick="hideEdit()">X</button>
+        <h2>Editar Prestacion</h2>
+        <form>
+            <label for="editIdCatalogo">Catalogo:</label>
+            <input type="text" id="editIdCatalogo" name="editIdCatalogo">
+            <i class="fas fa-search" onclick="showcatalogo()" style="cursor:pointer;"></i>
+
+            <label for="editIdPrestacion">Prestacion:</label>
+            <input type="text" id="editIdPrestacion" name="editIdPrestacion">
+
+            <label for="editIdFamilia">Familia:</label>
+            <input type="text" id="editIdFamilia" name="editIdFamilia">
+            <i class="fas fa-search" onclick="showFamilias()" style="cursor:pointer;"></i>
+
+            <label for="editIdSubFamilia">Subfamilia:</label>
+            <input type="text" id="editIdSubFamilia" name="editIdSubFamilia">
+            <i class="fas fa-search" onclick="showSubFamilias()" style="cursor:pointer;"></i>
+
+            <label for="editDescripcion">Descripcion:</label>
+            <input type="text" id="editDescripcion" name="editDescripcion" required>
+
+            <label for="editUnidadMedida">Unidad Medida:</label>
+            <input type="text" id="editUnidadMedida" name="editUnidadMedida">
+
+            <label for="editDuracion">Duracion:</label>
+            <input type="text" id="editDuracion" name="editDuracion">
+
+            
+
+            <button type="button" onclick="updateRow()">Guardar</button>
+            <button type="button" onclick="hideEdit()">Cancelar</button>
+        </form>
+    </div>
+
+    <!-- Importar dados -->
+    <div id="importPopup" class="popup">
+        <button id="closePopupBtn" onclick="hideImport()">X</button>
+        <h2>Carga de Datos</h2>
+        <form action="/carga_prestacion" method="POST" enctype="multipart/form-data">
+            <input type="file" id="importFile" class="importfile-button" name="importFile" accept=".xlsx">
+            <button type="submit" class="import-button">Subir</button>
+            <button type="button" class="cancel-button" onclick="hideImport()">Cancelar</button>
+            <a href="/download_prestacion" class="btn btn-primary">Bajar Plantilla</a>
+
+        </form>
+    </div>
+
+
+    <div id="loading" style="display:none">
+        <i class="fas fa-spinner fa-spin"></i> Cargando...
+    </div>
+</form>
+
+
+<!-- Pop-up de Familia -->
+{% include "popup/familiaPopup.html" %}
+<!-- Pop-up de Subfamilia -->
+{% include "popup/SubfamiliaPopup.html" %}
+<!-- Pop-up de Catalogo -->
+{% include "popup/catalogoPopup.html" %}
+
+<table id="resultsTable" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>IdCatalogo</th>
+            <th>IdPrestacion</th>
+            <th>IdFamilia</th>
+            <th>IdSubFamilia</th>
+            <th>Descripcion</th>
+            <th>Unidad de Medida</th>
+            <th>Duración</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+</table>
+<div id="paginationDiv">
+    <select id="pagination" title="Selecionar página"></select>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/static/scripts/prestacao.js"></script>
+<script src="/static/scripts/popup/Catalogo.js"></script>
+<script src="/static/scripts/popup/Familia.js"></script>
+<script src="/static/scripts/popup/Subfamilia.js"></script>
+{% endblock %}

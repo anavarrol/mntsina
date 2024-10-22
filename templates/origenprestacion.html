@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="static/origenprestacion.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<h1>Origen Prestacion</h1>
+<a href="/" >
+    <img src="/static/images/logo_sina-01.svg" alt="Logo" ">
+  </a>
+
+<form>
+    <label for="CodCentro">CodCentro:</label>
+    <input type="text" id="CodCentro" name="CodCentro">
+    <label for="IdPrestacion">Prestacion:</label>
+    <input type="text" id="IdPrestacion" name="IdPrestacion">
+    <button type="button" onclick="filter()">Filtrar</button>
+
+    <a href="#" onclick="showConfig()" class="btn btn-primary"><i class="fas fa-folder-plus"
+            title="Añadir Familia"></i></a>
+
+    <div id="loading" style="display:none">
+        <i class="fas fa-spinner fa-spin"></i> Cargando...
+    </div>
+
+</form>
+<!-- Popup de adição -->
+<div id="configPopup" class="popup">
+    <button id="closePopupBtn" onclick="hideConfig()">X</button>
+    <h2>Añadir Origen Prestacion</h2>
+    <form>
+        <label for="configCodCentro">CodCentro:</label>
+        <input type="text" id="configCodCentro" name="configCodCentro" required>
+
+        <label for="configIdAmbito">Ambito:</label>
+        <input type="text" id="configIdAmbito" name="configIdAmbito" required>
+        <i class="fas fa-search" onclick="showambito()" style="cursor:pointer;"></i>
+
+        <label for="configIdServicio">Servicio:</label>
+        <input type="text" id="configIdServicio" name="configIdServicio">
+        <i class="fas fa-search" onclick="showservicio()" style="cursor:pointer;"></i>
+
+        <label for="ConfigIdCatalogo">Catalogo:</label>
+        <input type="text" id="ConfigIdCatalogo" name="ConfigIdCatalogo" required>
+        <i class="fas fa-search" onclick="showcatalogo()" style="cursor:pointer;"></i>
+
+        <label for="ConfigIdPrestacion">Prestacion:</label>
+        <input type="text" id="ConfigIdPrestacion" name="ConfigIdPrestacion" required>
+        <i class="fas fa-search" onclick="showprestacion()" style="cursor:pointer;"></i>
+
+        <div class="buttons-container">
+        <button type="submit" onclick="GudarConfig()">Guardar</button>
+        <button type="button" onclick="hideConfig()">Cancelar</button>
+        </div>
+    </form>
+</div>
+
+<!-- Popup de edição -->
+<div id="editPopup" class="popup">
+    <button id="closePopupBtn" onclick="hideEdit()">X</button>
+    <h2>Editar Familia</h2>
+    <form>
+        <input type="hidden" id="editCodCentro" name="editCodCentro">
+
+        <label for="editIdAmbito">Ambito:</label>
+        <input type="text" id="editIdAmbito" name="editIdAmbito">
+        <i class="fas fa-search" onclick="showambito()" style="cursor:pointer;"></i>
+
+        <label for="editServicio">Servicio:</label>
+        <input type="text" id="editServicio" name="editServicio">
+        <i class="fas fa-search" onclick="showservicio()" style="cursor:pointer;"></i>
+        
+        <label for="editIdCatalogo">Catalogo:</label>
+        <input type="text" id="editIdCatalogo" name="editIdCatalogo" required>
+        <i class="fas fa-search" onclick="showcatalogo()" style="cursor:pointer;"></i>
+
+        <label for="editIdPrestacion">Prestacion:</label>
+        <input type="text" id="editIdPrestacion" name="editIdPrestacion" required>
+        <i class="fas fa-search" onclick="showprestacion()" style="cursor:pointer;"></i>
+
+
+        <button type="button" onclick="updateRow()">Guardar</button>
+        <button type="button" onclick="hideEdit()">Cancelar</button>
+    </form>
+</div>
+
+<!-- Pop-up de Servicio -->
+{% include "popup/ambitoPopup.html" %}
+<!-- Pop-up de Servicio -->
+{% include "popup/servicioPopup.html" %}
+<!-- Pop-up de Prestacion -->
+{% include "popup/prestacionPopup.html" %}
+<!-- Pop-up de Catalogo-->
+{% include "popup/catalogoPopup.html" %}
+
+
+
+<table id="resultsTable">
+    <thead>
+        <tr>
+
+            <th>CodCentro</th>
+            <th>Ambito</th>
+            <th>Servicio</th>
+            <th>Catalogo</th>
+            <th>Prestacion</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+</table>
+
+<script src="/static/scripts/origenprestacion.js"></script>
+<script src="/static/scripts/popup/Servicio.js"></script>
+<script src="/static/scripts/popup/Prestacion.js"></script>
+<script src="/static/scripts/popup/Ambito.js"></script>
+<script src="/static/scripts/popup/Catalogo.js"></script>
+
+<div id="paginationDiv">
+    <select id="pagination" title="Seleccionar página"></select>
+</div id="paginationDiv">
+{% endblock %}

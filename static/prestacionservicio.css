@@ -1,0 +1,294 @@
+/* Estilos para a página de filtro */
+
+/* Estilo para o título da página */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Estilo para o formulário de filtro */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+/* Estilo para cada rótulo de entrada do formulário */
+label {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+/* Estilo para cada entrada de texto do formulário */
+input[type="text"] {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-right: 1rem;
+  text-align: justify;
+}
+
+/* Estilo para o botão de filtro */
+button[type="button"] {
+  background-color: #36a4d0;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.0rem;
+  cursor: pointer;
+  margin-right: 1.0rem;
+}
+
+/* Estilo para a tabela de resultados */
+table {
+  /*border-collapse: collapse;*/
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Estilo para o cabeçalho da tabela */
+thead {
+  background-color: #36a4d0;
+  color: white;
+}
+
+/* Estilo para as células do cabeçalho da tabela */
+th {
+  padding: 0.5rem;
+  text-align: justify;
+}
+
+/* Estilo para as células do corpo da tabela */
+td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+}
+
+/* Estilo para o dropdown de paginação */
+#paginationDiv {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#pagination {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+
+/* Estilo para as opções selecionadas do dropdown de paginação */
+#pagination option:checked {
+  background-color: #36a4d0;
+  color: white;
+}
+
+/* Estilo para o ícone plus no botão "Añadir" */
+.btn-primary i.fa-circle-plus:before {
+content: "\f055";
+margin-right: 5px;
+}
+
+/* Estilo para o botão "Añadir" com ícone */
+.btn-primary {
+background-color: #36a4d0;
+color: white;
+padding: 0.5rem 1rem;
+border: none;
+border-radius: 5px;
+font-size: 1.2rem;
+cursor: pointer;
+display: flex;
+align-items: center;
+}
+
+.btn-primary:hover {
+background-color: #36a4d0;
+}
+
+.btn-primary:active {
+background-color: #36a4d0;
+}
+
+.buttons-container {
+display: flex;
+align-items: center;
+justify-content: flex-end;
+}
+
+.buttons-container button {
+background-color: #36a4d0;
+color: white;
+padding: 0.5rem 1rem;
+border: none;
+border-radius: 5px;
+font-size: 1.0rem;
+cursor: pointer;
+margin-left: 10px; /* adiciona margem à direita */
+height: 2.5rem;
+}
+
+
+.popup {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 500px;
+}
+.popup h2 {
+text-align: center;
+}
+
+.popup label {
+display: block;
+margin-bottom: 10px;
+text-align: left;
+}
+
+.popup input[type="text"] {
+width: 80%;
+margin-bottom: 20px;
+}
+.popup .buttons-container {
+  justify-content: flex-end;
+}
+
+.popup .buttons-container button {
+  margin-left: 10px;
+}
+
+.popup-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    }
+#loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      z-index: 1000;
+  }
+  
+#loading i {
+      margin-right: 10px;
+  }
+
+.top-bar {
+  width: 100%;
+  z-index: 5;
+  box-sizing: border-box;
+  background-color: #252525;
+  height: 6vh;
+  min-height: 46px;
+  line-height: 6vh;
+}
+
+img
+{
+height: 8% !important;
+position: absolute; 
+top: 25px; 
+right: 25px;
+
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.table-hover tbody tr:hover th,
+.table-hover tbody tr:hover td {
+  background-color: #f5f5f5;
+}
+.scrollable {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.import-button {
+  background-color: #36a4d0;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.import-button i {
+  margin-right: 5px;
+}
+
+.import-button:hover {
+  background-color: #21a008;
+}
+
+.import-button:active {
+  background-color: #21a008;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.cancel-button i {
+  margin-right: 5px;
+}
+
+.cancel-button:hover {
+  background-color: #dc3545;
+}
+
+.cancel-button:active {
+  background-color: #dc3545;
+}
+
+.importfile-button {
+  /*background-color: #36a4d0;*/
+  color: rgb(0, 0, 0);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.importfile-button i {
+  margin-right: 5px;
+}

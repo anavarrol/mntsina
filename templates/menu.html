@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="/static/menu.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<nav class="menu">
+    <img src="/static/images/logo_sina-01.svg" style="position: absolute; top: 25px; right: 25px; height: 8%;">
+    <ul>
+        <li><a href="#" onclick="showConfig()" class="btn btn-primary red ">Configuración del Entorno</a></li>
+        <li><a href="#" id="familiaLink" class="btn btn-primary red " >Familia</a></li>
+        <li><a href="#" id="subfamiliaLink" class="btn btn-primary red ">Subfamilia</a></li>
+        <li><a href="#" id="prestacaoLink" class="btn btn-primary red ">Prestación</a></li>
+        <li><a href="#" id="tipoprestacionLink" class="btn btn-primary red ">Tipo de Prestación</a></li>
+        <li><a href="#" id="origenprestacionLink" class="btn btn-primary red ">Origen Prestación</a></li>
+        <li><a href="#" id="prestacionservicioLink" class="btn btn-primary red ">Prestación Servicio</a></li>
+        <li><a href="#" id="garantesLink" class="btn btn-primary red ">Garantes</a></li>
+        <li><a href="#" id="contratoLink" class="btn btn-primary red ">Contrato</a></li>
+        <li><a href="#" id="lotesLink" class="btn btn-primary red ">Lotes</a></li>
+        
+    </ul>
+</nav>
+
+<!-- Popup de configuración -->
+<div id="configPopup" class="popup">
+    <button id="closePopupBtn" onclick="hideConfig()">X</button>
+    <h2>Configuración del Entorno</h2>
+    <form>
+        <label for="server">Server:</label>
+        <input type="text" id="server" name="server" required>
+
+        <label for="database">Database:</label>
+        <input type="text" id="database" name="database" required>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="button" onclick="testConnection()">Probar</button>
+        <button type="button" onclick="saveConfig()">Guardar</button>          
+        <button type="button" onclick="hideConfig()">Cancelar</button>
+    </form>
+</div>
+
+<script src="/static/scripts/menu.js"></script>
+
+

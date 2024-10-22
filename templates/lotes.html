@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="static/lotes.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<h1>Lotes</h1>
+<a href="/" >
+    <img src="/static/images/logo_sina-01.svg" alt="Logo">
+</a>
+
+<form>
+    <label for="Cod_lote">Cod_lote:</label>
+    <input type="text" id="Cod_lote" name="Cod_lote">
+    <label for="Centro">Centro:</label>
+    <input type="text" id="Centro" name="Centro">
+    <button type="button" onclick="filter()">Filtrar</button>
+
+    <a href="#" onclick="showConfig()" class="btn btn-primary"><i class="fas fa-folder-plus"
+            title="Añadir Lote"></i></a>
+
+    <div id="loading" style="display:none">
+        <i class="fas fa-spinner fa-spin"></i> Cargando...
+    </div>
+
+</form>
+
+<!-- Popup de añadir -->
+<div id="configPopup" class="popup">
+    <button id="closePopupBtn" onclick="hideConfig()">X</button>
+    <h2>Añadir Lote</h2>
+    <form>
+        <label for="configCentro">Centro:</label>
+        <input type="text" id="configCentro" name="configCentro" required>
+
+        <label for="configCod_lote">Cod_lote:</label>
+        <input type="text" id="configCod_lote" name="configCod_lote" required>
+
+        <label for="configFechaInicio">Fecha de inicio:</label>
+        <input type="text" id="configFechaInicio" name="configFechaInicio">
+
+        <label for="configFechaFin">Fecha de fin:</label>
+        <input type="text" id="configFechaFin" name="configFechaFin">
+
+        <label for="configDescripcion">Descripcion:</label>
+        <input type="text" id="configDescripcion" name="configDescripcion" required>
+
+        <label for="configServicioCanario">Servicio Canario:</label>
+        <input type="text" id="configServicioCanario" name="configServicioCanario" required>
+
+        <label for="configServicioCompañia">Servicio Compañia:</label>
+        <input type="text" id="configServicioCompañia" name="configServicioCompañia" required>
+
+        <label for="configId_lote">Id Lote:</label>
+        <input type="text" id="configId_lote" name="configId_lote" required>
+
+        <div class="buttons-container">
+        <button type="submit" onclick="GuardarConfig()">Guardar</button>
+        <button type="button" onclick="hideConfig()">Cancelar</button>
+        </div>
+    </form>
+</div>
+
+<!-- Popup de editar -->
+<div id="editPopup" class="popup">
+    <button id="closePopupBtn" onclick="hideEdit()">X</button>
+    <h2>Editar Lotes</h2>
+    <form>
+        
+        <label for="editCentro">Centro:</label>
+        <input type="text" id="editCentro" name="editCentro" required>
+
+        <label for="editCod_lote">Cod_Lote:</label>
+        <input type="text" id="editCod_lote" name="editCod_lote" required>
+
+        <label for="editFechaInicio">Fecha de inicio:</label>
+        <input type="text" id="editFechaInicio" name="editFechaInicio" required>
+
+        <label for="editFechaFin">Fecha de fin:</label>
+        <input type="text" id="editFechaFin" name="editFechaFin" required>
+
+        <label for="editDescripcion">Descripcion:</label>
+        <input type="text" id="editDescripcion" name="editDescripcion" required>
+
+        <label for="editServicioCanario">Servicio Canario:</label>
+        <input type="text" id="editServicioCanario" name="editServicioCanario" required>
+
+        <label for="editServicioCompañia">Servicio Compañia:</label>
+        <input type="text" id="editServicioCompañia" name="editServicioCompañia" required>
+
+        <label for="editId_lote">Id_Lote:</label>
+        <input type="text" id="editId_lote" name="editId_lote" required>
+
+
+        <button type="button" onclick="updateRow()">Guardar</button>
+        <button type="button" onclick="hideEdit()">Cancelar</button>
+    </form>
+</div>
+
+<table id="resultsTable">
+    <thead>
+        <tr>
+            <th>Centro</th>
+            <th>Cod_Lote</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Descripcion</th>
+            <th>Servicio Canario</th>
+            <th>Servicio Compañia</th>
+            <th>Id Lote</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+</table>
+
+<div id="paginationDiv">
+    <select id="pagination" title="Seleccionar página"></select>
+</div id="paginationDiv">
+
+<script src="/static/scripts/lotes.js"></script>
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="static/TipoPrestacion.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<h1>TipoPrestacion</h1>
+<a href="/">
+    <img src="/static/images/logo_sina-01.svg" alt="Logo">
+</a>
+
+<form>
+    <label for="Codigo">Codigo:</label>
+    <input type="text" id="Codigo" name="Codigo">
+    <label for="Descripcion">Descripcion:</label>
+    <input type="text" id="Descripcion" name="Descripcion">
+    <button type="button" onclick="filter()">Filtrar</button>
+
+    <div id="loading" style="display:none">
+        <i class="fas fa-spinner fa-spin"></i> Cargando...
+    </div>
+</form>
+
+<!-- Popup de configuração -->
+<div id="configPopup" class="popup">
+    <button id="closePopupBtn" onclick="hideConfig()">X</button>
+    <h2>Añadir Prestacion</h2>
+    <form>
+        <label for="Codigo">Codigo:</label>
+        <input type="text" id="Codigo" name="Codigo" required>
+
+        <label for="configDescripcion">Descripcion:</label>
+        <input type="text" id="configDescripcion" name="configDescripcion" required>
+
+        <button type="submit" onclick="GudarConfig()">Guardar</button>
+        <button type="button" onclick="hideConfig()">Cancelar</button>
+    </form>
+</div>
+
+<!-- Popup de edição -->
+<div id="editPopup" class="popup">
+    <button id="closePopupBtn" onclick="hideEdit()">X</button>
+    <h2>Editar Familia</h2>
+    <form>
+        <input type="hidden" id="editCodigo" name="editCodigo">
+
+        <label for="editDescripcion">Descripcion:</label>
+        <input type="text" id="editDescripcion" name="editDescripcion" required>
+        <button type="button" onclick="updateRow()">Guardar</button>
+        <button type="button" onclick="hideEdit()">Cancelar</button>
+    </form>
+</div>
+
+
+
+<table id="resultsTable">
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+</table>
+<div id="paginationDiv">
+    <select id="pagination" title="Seleccionar página"></select>
+</div>
+<!-- Script para mostrar el pop-up de alerta -->
+<script>
+    // Mostrar pop-up de alerta
+    window.onload = function () {
+        alert('Esta pantalla es solo para visualización. Cualquier modificación no debe ser hecha por esta interfaz y cualquier cambio impacta al funcionamiento de SINA.');
+    };
+</script>
+
+<script src="/static/scripts/TipoPrestacion.js"></script>
+
+{% endblock %}
